@@ -1,1 +1,1 @@
-console.log('Sending Data...');
+console.log('Sending...');

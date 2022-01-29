@@ -1,2 +1,2 @@
 "use strict";
-console.log('Sending Data...');
+console.log('Sending...');

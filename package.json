@@ -1,0 +1,23 @@
+{
+  "name": "understanding-typescript",
+  "version": "1.0.0",
+  "description": "https://www.udemy.com/course/understanding-typescript-jp/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/10inoino/understanding-typescript.git"
+  },
+  "author": "matty",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/10inoino/understanding-typescript/issues"
+  },
+  "homepage": "https://github.com/10inoino/understanding-typescript#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}

@@ -1,5 +1,6 @@
-var person = {
-    name: 'matty',
+"use strict";
+const person = {
+    name: 'matty1',
     age: 25,
     hobbies: ["basketball", "movie"],
     role: [2, 'author']

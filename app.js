@@ -7,3 +7,4 @@ const person = {
 };
 person.role.push('admin');
 console.log(person);
+//# sourceMappingURL=app.js.map

@@ -1,9 +1,16 @@
 "use strict";
-const person = {
-    name: 'matty1',
-    age: 25,
-    hobbies: ["basketball", "movie"],
-    role: [2, 'author']
+const userName = "Max";
+let age = 30;
+age = 29;
+const add = (a, b) => a + b;
+const printOutput = (output) => {
+    console.log(output);
 };
-person.role.push('admin');
-console.log(person);
+printOutput(add(2, 5));
+const button = document.querySelector("button");
+if (button) {
+    button.addEventListener("click", (event) => {
+        console.log(event);
+    });
+}
+//# sourceMappingURL=app.js.map

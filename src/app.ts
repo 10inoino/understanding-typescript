@@ -1,145 +1,93 @@
-type Admin = {
-  name: string;
-  privileges: string[];
-};
+// const names: Array<String> = ['Max', 'Manuel'];
+// names[0].split(' ');
 
-type Employee = {
-  name: string;
-  startDate: Date;
-};
+// const promise: Promise<any> = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve('終わりました！');
+//   }, 2000);
+// })
 
-type ElevatedEmployee = Admin & Employee;
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
 
-const e1: ElevatedEmployee = {
-  name: "Max",
-  privileges: ["create-server"],
-  startDate: new Date(),
-};
+const mergedObj = merge({ name: "Max" }, { age: 30 });
+console.log(mergedObj.age);
 
-type Combinable = string | number;
-type Numeric = number | boolean;
+interface Lengthy {
+  length: number;
+}
 
-type Unuversal = Combinable & Numeric;
-
-function add(a: number, b:number): number;
-function add(a: string, b:string): string;
-function add(a: number, b:string): string;
-function add(a: string, b:number): string;
-function add(a: Combinable, b: Combinable) {
-  if (typeof a === "string" || typeof b === "string") {
-    return a.toString() + b.toString();
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+  let descriptionText = "値がありません。";
+  if (element.length > 0) {
+    descriptionText = "値は" + element.length + "個です。";
   }
-  return a + b;
+  return [element, descriptionText];
 }
 
-const result = add("Hello", "TypeScript");
-result.split(' ');
+console.log(countAndDescribe(["Sports", "Cooking"]));
 
-const fetchedUserData = {
-  id: 'u1',
-  name: 'user1',
-  job: {
-    title: 'Developer',
-    description: 'TypeScript',
-  },
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
+  return "Value: " + obj[key];
 }
 
-console.log(fetchedUserData?.job?.title);
+extractAndConvert({ name: "Max" }, "name");
 
-const userInput = undefined;
+class DataStorage<T extends string | number | boolean> {
+  private data: T[] = [];
 
-const storedData = userInput ?? 'DEFAULT';
+  addItem(item: T) {
+    this.data.push(item);
+  }
 
-console.log(storedData);
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return;
+    }
+    this.data.splice(this.data.indexOf(item), 1);
+  }
 
-// type UnknownEmployee = Employee | Admin;
+  getItems() {
+    return [...this.data];
+  }
+}
 
-// function printEmployeeinformation(emp: UnknownEmployee) {
-//   console.log(emp.name);
-//   if ("privileges" in emp) {
-//     console.log("Privileges: " + emp.privileges);
-//   }
+const textStorage = new DataStorage<string>();
+textStorage.addItem("Data1");
+textStorage.addItem("Data2");
+textStorage.removeItem("Data1");
+console.log(textStorage.getItems());
 
-//   if ("startDate" in emp) {
-//     console.log("Privileges: " + emp.startDate);
-//   }
-// }
+const numberStorage = new DataStorage<number>();
 
-// printEmployeeinformation({ name: "Manu", startDate: new Date() });
+// const objStorage = new DataStorage<object>();
+// objStorage.addItem({name: 'Max'});
+// objStorage.addItem({name: 'Manu'});
 
-// class Car {
-//   drive() {
-//     console.log("運転中…");
-//   }
-// }
+// objStorage.removeItem({name: 'Manu'});
+// console.log(objStorage.getItems());
 
-// class Truck {
-//   drive() {
-//     console.log("トラックを運転中…");
-//   }
+interface CourceGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
 
-//   loadCargo(amount: number) {
-//     console.log("荷物を載せています…" + amount);
-//   }
-// }
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourceGoal {
+  let courseCoal: Partial<CourceGoal> = {};
+  courseCoal.title = title;
+  courseCoal.description = description;
+  courseCoal.completeUntil = date;
+  return courseCoal as CourceGoal;
+}
 
-// type Vehicle = Car | Truck;
-
-// const v1 = new Car();
-// const v2 = new Truck();
-
-// function useVehicle(vehicle: Vehicle) {
-//   vehicle.drive();
-//   if (vehicle instanceof Truck) {
-//     vehicle.loadCargo(1000);
-//   }
-// }
-
-// useVehicle(v1);
-// useVehicle(v2);
-
-// interface Bird {
-//   type: "bird";
-//   flyingSpeed: number;
-// }
-
-// interface Horse {
-//   type: "horse";
-//   runningSpeed: number;
-// }
-
-// type Animal = Bird | Horse;
-
-// function moveAnimal(animal: Animal) {
-//   let speed;
-//   switch (animal.type) {
-//     case "bird":
-//       speed = animal.flyingSpeed;
-//       break;
-//     case "horse":
-//       speed = animal.runningSpeed;
-//   }
-//   console.log("移動速度: " + speed);
-// }
-
-// moveAnimal({ type: "bird", flyingSpeed: 10 });
-
-// const paragraph = document.getElementById("message-output");
-// // const userInputElement = <HTMLInputElement>document.getElementById("user-input")!;
-// const userInputElement = document.getElementById(
-//   "user-input"
-// );
-
-// if (userInputElement) {
-//   (userInputElement as HTMLInputElement).value = "こんにちは";
-// }
-
-// interface ErrorContainer {
-//   [prop: string]: string;
-// }
-
-// const errorBag: ErrorContainer = {
-//   email: "正しいメールアドレスではありません",
-//   username: "ユーザー名に記号を含めることはできません"
-// };
-
+const names : Readonly<string[]> = ['Max', 'Anna'];
+// names.push('Manu');

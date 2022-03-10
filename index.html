@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>TypeScriptを理解する</title>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn6shVlLkagblIQO5bv7XmgAyABw5zhik"
+      async
+    ></script>
     <script type="module" src="dist/bundle.js" defer></script>
+    <link rel="stylesheet" href="app.css" />
   </head>
   <body>
-    <script>
-      var GLOBAL = 'グローバル変数';
-    </script>
+    <div id="map">
+      <p>住所を入力してください。</p>
+    </div>
+    <form>
+      <input type="text" id="address" />
+      <button type="submit">検索</button>
+    </form>
   </body>
 </html>

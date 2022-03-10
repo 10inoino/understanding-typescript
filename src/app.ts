@@ -1,16 +1,47 @@
-import { Product } from "./product.model";
+import axios from "axios";
 
-const products = [
-  { title: "商品1", price: 100 },
-  { title: "商品2", price: 200 },
-];
+const form = document.querySelector("form")!;
+const addressInput = document.getElementById("address")! as HTMLInputElement;
 
-// const p1 = new Product("商品1", 100);
+const GOOGLE_API_KEY = "AIzaSyAn6shVlLkagblIQO5bv7XmgAyABw5zhik";
 
-const loadedProducts = products.map(prod => {
-  return new Product(prod.title, prod.price);
-})
+type GoogleGeocordingResponse = {
+  results: { geometry: { location: { lat: number; lng: number } } }[];
+  status: "OK" | "ZERO_RESULTS";
+};
+// declare var google: any;
 
-for (const prod of loadedProducts) {
-  console.log(prod.getInformation());
+function searchAddressHandler(event: Event) {
+  event.preventDefault();
+  const enteredAddress = addressInput.value;
+
+  axios
+    .get<GoogleGeocordingResponse>(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
+        enteredAddress
+      )}&key=${GOOGLE_API_KEY}`
+    )
+    .then((response) => {
+      if (response.data.status !== "OK") {
+        throw new Error("座標を取得できませんでした。");
+      }
+      const coordinates = response.data.results[0].geometry.location;
+      const map = new google.maps.Map(
+        document.getElementById("map")! as HTMLElement,
+        {
+          center: coordinates,
+          zoom: 16,
+        }
+      );
+      new google.maps.Marker({
+        position: coordinates,
+        map: map,
+      });
+    })
+    .catch((err) => {
+      alert(err.message);
+      console.log(err);
+    });
 }
+
+form.addEventListener("submit", searchAddressHandler);

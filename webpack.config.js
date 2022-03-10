@@ -8,6 +8,10 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     publicPath: "/dist",
   },
+  // watchOptions: {
+  //   aggregateTimeout: 200,
+  //   poll: 1000
+  // },
   devServer: {
     static: [
       {
